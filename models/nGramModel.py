@@ -10,9 +10,7 @@ class NGramModel(object):
         Requires: nothing
         Modifies: self (this instance of the NGramModel object)
         Effects:  This is the NGramModel constructor. It sets up an empty
-                  dictionary as a member variable. It is called from the
-                  constructors of the NGramModel child classes. This
-                  function is done for you.
+                  dictionary as a member variable.
         """
         self.nGramCounts = {}
 
