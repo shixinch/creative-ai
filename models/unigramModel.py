@@ -3,17 +3,6 @@ from nGramModel import *
 
 class UnigramModel(NGramModel):
 
-    def __init__(self):
-        """
-        Requires: nothing
-        Modifies: self (this instance of the UnigramModel object)
-        Effects:  this is the UnigramModel constructor, which is done
-                  for you. It allows UnigramModel to access the data
-                  in the NGramModel class by calling the NGramModel
-                  constructor.
-        """
-        super(UnigramModel, self).__init__()
-
     def trainModel(self, text):
         """
         Requires: text is a list of lists of strings
@@ -23,7 +12,12 @@ class UnigramModel(NGramModel):
                   For further explanation of UnigramModel's version of
                   self.nGramCounts, see the spec.
         """
-        pass
+        for sentence in text:
+            for word in sentence:
+                if word in self.nGramCounts:
+                    self.nGramCounts[word] += 1
+                else:
+                    self.nGramCounts[word] = 1
 
     def trainingDataHasNGram(self, sentence):
         """
@@ -33,7 +27,7 @@ class UnigramModel(NGramModel):
                   the next token for the sentence. For explanations of how this
                   is determined for the UnigramModel, see the spec.
         """
-        pass
+        return True
 
     def getCandidateDictionary(self, sentence):
         """
