@@ -12,12 +12,7 @@ class UnigramModel(NGramModel):
                   For further explanation of UnigramModel's version of
                   self.nGramCounts, see the spec.
         """
-        for sentence in text:
-            for word in sentence:
-                if word in self.nGramCounts:
-                    self.nGramCounts[word] += 1
-                else:
-                    self.nGramCounts[word] = 1
+        pass
 
     def trainingDataHasNGram(self, sentence):
         """
@@ -27,7 +22,7 @@ class UnigramModel(NGramModel):
                   the next token for the sentence. For explanations of how this
                   is determined for the UnigramModel, see the spec.
         """
-        return True
+        pass
 
     def getCandidateDictionary(self, sentence):
         """
