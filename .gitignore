@@ -4,5 +4,4 @@
 *.swo
 env/
 *.egg-info
-saved/
 *.json
