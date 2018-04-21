@@ -1,16 +1,11 @@
-import random
-from nGramModel import *
-
-class UnigramModel(NGramModel):
+class UnigramModel:
 
     def trainModel(self, text):
         """
         Requires: text is a list of lists of tokens
         Modifies: self.nGramCounts
-        Effects:  this function populates the self.nGramCounts dictionary,
-                  which is a dictionary of {token: integer} pairs.
-                  For further explanation of UnigramModel's version of
-                  self.nGramCounts, see the spec.
+        Effects:  this function populates self.nGramCounts as a dictionary
+                  of { token1: count } pairs
         """
         pass
 
@@ -18,9 +13,7 @@ class UnigramModel(NGramModel):
         """
         Requires: sentence is a list of tokens
         Modifies: nothing
-        Effects:  returns True if this n-gram model can be used to choose
-                  the next token for the sentence. For explanations of how this
-                  is determined for the UnigramModel, see the spec.
+        Effects:  returns True if this unigram model has trained on tokens
         """
         pass
 
@@ -29,9 +22,8 @@ class UnigramModel(NGramModel):
         Requires: sentence is a list of tokens, and trainingDataHasNGram
                   has returned True for this particular language model
         Modifies: nothing
-        Effects:  returns the dictionary of candidate next words to be added
-                  to the current sentence. For details on which words the
-                  UnigramModel sees as candidates, see the spec.
+        Effects:  returns the dictionary of candidate next tokens to be added
+                  to the current sentence.
         """
         pass
 

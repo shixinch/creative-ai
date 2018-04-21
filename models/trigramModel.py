@@ -1,18 +1,11 @@
-import random
-from nGramModel import *
-
-class TrigramModel(NGramModel):
+class TrigramModel:
 
     def trainModel(self, text):
         """
         Requires: text is a list of lists of tokens
-        Modifies: self.nGramCounts, a three-dimensional dictionary. For
-                  examples and pictures of the TrigramModel's version of
-                  self.nGramCounts, see the spec.
-        Effects:  this function populates the self.nGramCounts dictionary,
-                  which has tokens as keys and dictionaries as values,
-                  where those inner dictionaries have tokens as keys
-                  and dictionaries of {token: integer} pairs as values.
+        Modifies: self.nGramCounts
+        Effects:  this function populates self.nGramCounts as a 3D
+                  dictionary of { token1: { token2: { token3: count }}} pairs
         """
         pass
 
@@ -20,9 +13,8 @@ class TrigramModel(NGramModel):
         """
         Requires: sentence is a list of tokens, and len(sentence) >= 2
         Modifies: nothing
-        Effects:  returns True if this n-gram model can be used to choose
-                  the next token for the sentence. For explanations of how this
-                  is determined for the TrigramModel, see the spec.
+        Effects:  returns True if the last two tokens in sentence match
+                  some trigram in this model
         """
         pass
 
@@ -31,9 +23,8 @@ class TrigramModel(NGramModel):
         Requires: sentence is a list of tokens, and trainingDataHasNGram
                   has returned True for this particular language model
         Modifies: nothing
-        Effects:  returns the dictionary of candidate next words to be added
-                  to the current sentence. For details on which words the
-                  TrigramModel sees as candidates, see the spec.
+        Effects:  returns the dictionary of candidate next tokens to be added
+                  to the current sentence.
         """
         pass
 

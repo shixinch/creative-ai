@@ -1,18 +1,13 @@
-import random
-from nGramModel import *
+from .. import utils
 
-
-class BigramModel(NGramModel):
+class BigramModel:
 
     def trainModel(self, text):
         """
         Requires: text is a list of lists of tokens
-        Modifies: self.nGramCounts, a two-dimensional dictionary. For examples
-                  and pictures of the BigramModel's version of
-                  self.nGramCounts, see the spec.
-        Effects:  this function populates the self.nGramCounts dictionary,
-                  which has tokens as keys and dictionaries of
-                  {token: integer} pairs as values.
+        Modifies: self.nGramCounts
+        Effects:  this function populates self.nGramCounts as a 2D
+                  dictionary of { token1: { token2: count}} pairs
         """
         pass
 
@@ -20,9 +15,8 @@ class BigramModel(NGramModel):
         """
         Requires: sentence is a list of tokens, and len(sentence) >= 1
         Modifies: nothing
-        Effects:  returns True if this n-gram model can be used to choose
-                  the next token for the sentence. For explanations of how this
-                  is determined for the BigramModel, see the spec.
+        Effects:  returns True if the last token in sentence matches
+                  some bigram in this model
         """
         pass
 
@@ -32,8 +26,7 @@ class BigramModel(NGramModel):
                   has returned True for this particular language model
         Modifies: nothing
         Effects:  returns the dictionary of candidate next words to be added
-                  to the current sentence. For details on which words the
-                  BigramModel sees as candidates, see the spec.
+                  to the current sentence.
         """
         pass
 
