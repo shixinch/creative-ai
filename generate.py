@@ -4,10 +4,9 @@
 import sys
 
 # Model imports
-from models.languageModel import LanguageModel()
+from models.languageModel import LanguageModel
 
 # Used In Music Generation
-from pysynth import pysynth
 from musicInfo import KEY_SIGNATURES, NOTE_DURATIONS
 
 # Used in Lyrics Generation

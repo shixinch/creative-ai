@@ -1,5 +1,3 @@
-from .. import utils
-
 class BigramModel:
 
     def trainModel(self, text):

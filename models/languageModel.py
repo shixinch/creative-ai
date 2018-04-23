@@ -2,10 +2,6 @@ from unigramModel import UnigramModel
 from bigramModel import BigramModel
 from trigramModel import TrigramModel
 
-from creative_ai.data.dataLoader import loadLyrics, loadMusic
-
-from creative_ai.utils import sentenceTooLong
-
 class LanguageModel:
 
     def __init__(self):
@@ -61,30 +57,14 @@ class LanguageModel:
         sentence = ['^::^', '^:::^']
         pass
 
-    def trainLyricModels(self, lyricDirs):
+    def trainModels(self, dataDirs):
         """
-        Requires: lyricDirs is a list of directories in data/lyrics/
+        Requires: dataDirs is a list of directories in data/
         Modifies: nothing
-        Effects:  for every directory in lyricDirs
-                call loadLyrics on that directory
-                and trains all three ngram models on the returned text
+        Effects:  for every directory in dataDirs
+                call loadData on that directory
+                and trains all three ngram models on the returned corpus
         """
-        #for ldir in lyricDirs:
-        #    lyrics = loadLyrics(ldir)
-        #    for model in models:
-        #        model.trainModel(lyrics)
-        #return models
-        pass
-
-    def trainMusicModels(self, musicDirs):
-        """
-        Requires: musicDirs is a list of directories in data/midi/
-        Modifies: nothing
-        Effects:  for every directory in musicDirs
-                call loadMusic on that directory
-                and trains all three ngram models on the returned text
-        """
-        # call dataLoader.loadMusic for each directory in musicDirs
         pass
 
     def output_models(val, output_fn = None):
