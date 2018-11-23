@@ -80,5 +80,5 @@ if __name__ == '__main__':
 
     text = [ ['the', 'brown', 'fox'], ['the', 'lazy', 'dog'] ]
     uni.trainModel(text)
-    # Should print: { 'brown': 2, 'dog': 1, 'fox': 1, 'lazy': 1, 'the': 2 }
+    
     print(uni)
