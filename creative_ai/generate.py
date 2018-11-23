@@ -153,8 +153,7 @@ def runMusicGenerator(models, songName):
 
 def generateTokenSentence(model, desiredLength):
     """
-    Requires: models is a list of trained NGramModel objects sorted by
-              descending priority: tri-, then bi-, then unigrams.
+    Requires: model is a single trained languageModel object.
               desiredLength is the desired length of the sentence.
     Modifies: nothing
     Effects:  returns a list of strings where each string is a word in the
