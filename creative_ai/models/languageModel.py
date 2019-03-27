@@ -117,4 +117,6 @@ class LanguageModel():
 ###############################################################################
 
 if __name__ == '__main__':
+    # remove 'pass' before adding test cases
+    pass
     # test cases here

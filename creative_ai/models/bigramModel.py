@@ -73,4 +73,6 @@ class BigramModel():
 ###############################################################################
 
 if __name__ == '__main__':
+    # remove 'pass' before adding test cases
+    pass
     # Add your test cases here
