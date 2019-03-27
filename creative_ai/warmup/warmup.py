@@ -229,6 +229,27 @@ class warmup(object):
         """
         pass
 
+    #hint: use the functions you defined above!
+    def __init__(self, name_in = " ", album_in = " "):
+        """
+        Requires: nothing
+        Modifies: self
+        Effects: Constructor
+                 Default (no arguments given): Sets self.bandName to "No name" and self.album to "No album"
+                 Non-Default (arguments given): Sets self.bandName to name_in and self.album to album_in
+        >>> w = warmup()
+        >>> w.bandName
+        'No name'
+        >>> w.album
+        'No album'
+        >>> a = warmup('Smash Mouth', 'Astro Lounge')
+        >>> a.bandName
+        'Smash Mouth'
+        >>> a.album
+        'Astro Lounge'
+        """
+        pass
+
 
 ###############################################################################
 # Main
