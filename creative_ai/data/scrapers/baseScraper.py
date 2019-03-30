@@ -3,11 +3,13 @@
 import os
 import subprocess
 import sys
-import httplib
-import urllib2
+import http.client
+import urllib.error
+import urllib.request
 import codecs
 import re
 from time import sleep
+from tqdm import tqdm
 
 URL_ENCODINGS = {
                     "%20": " ", "%21": "!", "%22": '"', "%23": "#",
@@ -34,32 +36,28 @@ class BaseScraper(object):
         """
         return "This is a scraper for " + self.hostUrl
 
-    def getPageHtml(self, relativeUrl):
+    def getPageHtml(self, relativeUrl, ssl=False):
         """
         Returns a string of the HTML for the page given by
         self.hostUrl + relativeUrl. Program will delay for 1 second afterwards.
         DO NOT alter this delay.
         """
-        relativeUrl = relativeUrl.encode('utf-8')
-        conn = httplib.HTTPConnection(host=self.hostUrl, timeout=30)
+        relativeUrl = relativeUrl
+
+        if (ssl):
+            conn = http.client.HTTPSConnection(host=self.hostUrl, timeout=30)
+        else:
+            conn = http.client.HTTPConnection(host=self.hostUrl, timeout=30)
+
         if relativeUrl[0] != "/":
             relativeUrl = "/" + relativeUrl
+
+        relativeUrl.encode('utf-8')
+
+        # print("GET: {}".format(self.hostUrl + relativeUrl))
         conn.request("GET", relativeUrl)
         html = conn.getresponse().read()
         html = html.decode("utf-8", errors="ignore")
 
         sleep(self.delay)
         return html
-
-    def updateProgressBar(self, progress, title, num):
-        """
-        Updates the visual progress bar, just for kicks.
-        """
-        progress += 1
-        hashes = ("#" * ((progress * 50) / num)).ljust(50)
-        progressBar = "\r[ " + hashes + " ] Operation in progress..."
-        sys.stdout.write(progressBar)
-        sys.stdout.flush()
-        return progress
-
-
