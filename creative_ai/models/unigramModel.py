@@ -39,6 +39,7 @@ class UnigramModel():
                   which is a dictionary of {string: integer} pairs.
                   For further explanation of UnigramModel's version of
                   self.nGramCounts, see the spec.
+                  Returns self.nGramCounts
         """
         pass
 
