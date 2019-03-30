@@ -42,6 +42,7 @@ class TrigramModel():
                   which has strings as keys and dictionaries as values,
                   where those inner dictionaries have strings as keys
                   and dictionaries of {string: integer} pairs as values.
+                  Returns self.nGramCounts
         """
         pass
 
