@@ -34,19 +34,19 @@ class VGMusicScraper(BaseScraper):
 
         while confirmation != "y":
             prompt = "Download music for which platform (no spaces)? "
-            userPlatform = raw_input(prompt)
+            userPlatform = input(prompt)
             userPlatform = userPlatform.lower()
             if userPlatform in self.platforms:
-                print "Do you mean the", self.platforms[userPlatform][0],
-                print userPlatform + "?"
-                confirmation = raw_input("Please confirm (y/n): ")
+                print("Do you mean the", self.platforms[userPlatform][0], end=" ")
+                print(userPlatform + "?")
+                confirmation = input("Please confirm (y/n): ")
             else:
-                print "Platform", userPlatform, "is not available at",
-                print self.hostUrl + "."
-                print "Please check vgMusicPlatforms.txt for the full list."
+                print("Platform", userPlatform, "is not available at", end="")
+                print(self.hostUrl + ".")
+                print("Please check vgMusicPlatforms.txt for the full list.")
 
         self.fullPlatform = self.platforms[userPlatform][0] + " " + userPlatform
-        return userPlatform, self.platforms[userPlatform][1]
+        return userPlatform, self.platforms[userPlatform][1][1:]
 
     def scrape(self, platform, path):
         """
@@ -58,27 +58,25 @@ class VGMusicScraper(BaseScraper):
         if not os.path.exists(midiDir):
             subprocess.call("mkdir " + midiDir, shell=True)
 
-        html = self.getPageHtml(path)
+        html = self.getPageHtml(path, ssl=True)
         midiPattern = re.compile('"(.*?.mid)"')
         midiMatches = re.findall(midiPattern, html)
 
         if len(os.listdir(midiDir)) == len(midiMatches):
             return
 
-        print "Found", len(midiMatches), "midi files for", self.fullPlatform
-        progress = 0
-        for match in midiMatches:
-            progress = self.updateProgressBar(progress, match, len(midiMatches))
-            url = "http://" + self.hostUrl + "/" + path + "/" + match
+        print("Found", len(midiMatches), "midi files for", self.fullPlatform)
+        for match in tqdm(midiMatches, total=len(midiMatches), desc="Converting midi", ncols=80):
+            url = "https://" + self.hostUrl + "/" + path + "/" + match
             try:
-                response = urllib2.urlopen(url)
+                response = urllib.request.urlopen(url)
                 midiFile = midiDir + "/" + match
-                destination = open(midiFile, "w+")
+                destination = open(midiFile, "bw+")
                 destination.write(response.read())
-            except urllib2.HTTPError:
+            except urllib.error.HTTPError:
                 pass
 
-        print "\nScraped data for", self.fullPlatform, "successfully\n"
+        print("\nScraped data for", self.fullPlatform, "successfully\n")
 
     def convertMidiToAscii(self, midiDir):
         """
@@ -91,12 +89,13 @@ class VGMusicScraper(BaseScraper):
         (i.e. if one wanted to manually or automatically download music
         from different sites).
         """
-        print "Converting midi files to .txt files"
+        print("Converting midi files to .txt files")
         midiFiles = os.listdir(midiDir)
 
         update = 0
-        for midiFile in midiFiles:
-            update = self.updateProgressBar(update, midiFile, len(midiFiles))
+        fail = 0
+        success = 0
+        for midiFile in tqdm(midiFiles, total=len(midiFiles), desc="Converting midi", ncols=80):
             if midiFile[-4:] == ".mid":
                 midiFile = midiDir + "/" + midiFile
                 midiTextFile = midiFile[:-4] + ".txt"
@@ -111,11 +110,14 @@ class VGMusicScraper(BaseScraper):
                 subprocess.call(removeCommand, shell=True)
 
                 if returnCode != 0:
+                    fail += 1
                     removeCommand = "rm " + midiTextFile
                     subprocess.call(removeCommand, shell=True)
+                else:
+                    success += 1
 
-        print "\nConverted all midi files in", self.fullPlatform,
-        print "directory to .txt files"
+        totalpf = fail + success            
+        print("\nSuccessfully converted {}/{} midi files in {} to txt files.".format(str(success), str(totalpf), self.fullPlatform))
 
 
 if __name__ == "__main__":
