@@ -1,5 +1,5 @@
 """Setup configurations."""
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='creative_ai',
@@ -8,6 +8,7 @@ setup(
     include_package_data=True,
     install_requires=[
         'tqdm',
-        'click'
+        'wheel',
+        'pysynth @ https://github.com/eecs183/183pysynth/archive/master.zip'
     ]
 )
