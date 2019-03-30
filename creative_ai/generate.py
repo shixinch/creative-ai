@@ -4,7 +4,7 @@ sys.dont_write_bytecode = True # Suppress .pyc files
 
 import random
 
-from creative_ai.pysynth import pysynth
+import pysynth
 from creative_ai.utils.menu import Menu
 from creative_ai.data.dataLoader import *
 from creative_ai.models.musicInfo import *
