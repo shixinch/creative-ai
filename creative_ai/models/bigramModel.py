@@ -40,6 +40,7 @@ class BigramModel():
         Effects:  this function populates the self.nGramCounts dictionary,
                   which has strings as keys and dictionaries of
                   {string: integer} pairs as values.
+                  Returns self.nGramCounts
         """
         pass
 
